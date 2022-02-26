@@ -249,15 +249,15 @@ class Data_Control {
 
 }
 
-const test = new Data_Control()
+// const test = new Data_Control()
 
 // test.add_goods("해으응", 100)
 // test.del_goods("으응")
 // test.attend('<@!612952077127385089>')
 // test.manage("<@!612952077127385089>", -123)
 // test.buy("<@!d>", "경고 차감권")
-test.add_user("1234")
-test.attend("1234")
-test.attend("1234")
-console.log(test.User_Data)
-test.save()
+// test.add_user("1234")
+// test.attend("1234")
+// test.attend("1234")
+// console.log(test.User_Data)
+// test.save()
