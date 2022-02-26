@@ -1,4 +1,5 @@
-const xlsx = require( "xlsx" );
+const xlsx = require("xlsx");
+const fs = require("fs")
 
 class Data_Control {
     
@@ -37,17 +38,25 @@ class Data_Control {
             data.push(temp)
         }
 
-        console.log(data)
+        // console.log(data)
 
         const xlsx_data = xlsx.utils.aoa_to_sheet(data);
         xlsx.utils.book_append_sheet( book, xlsx_data, "DATA");
         xlsx.writeFile( book, "data.xlsx" ); 
+
+        const goods_json = JSON.stringify(this.goods,null,4)
+        fs.writeFileSync("./data/goods.json", goods_json)
+        
+        const bot_config_json = JSON.stringify(this.bot_config,null,4)
+        fs.writeFileSync("bot_config.json", bot_config_json)
 
         console.log("save complete.");
     }
 
     load = () => {
         this.goods = require('./goods.json');
+        this.bot_config = require("../bot_config.json")
+        this.attend_coin = this.bot_config["attend_coin"]
 
         try {
 
@@ -169,11 +178,11 @@ class Data_Control {
         if (user in this.User_Data) {
             delete this.User_Data[user];
             console.log(`${user}'s information has been initialized.`);
-            return 0
+            return 0;
         }
         else{
             console.log(`${user} not found.`);
-            return -1
+            return -1;
         }
     }
 
@@ -257,13 +266,36 @@ class Data_Control {
         this.User_Data[user]["chat_count"] += 1
     }
 
+    edit_bot_config = (set, content) => {
+        if(set in this.bot_config){
+            console.log(`The value of ${set} has been changed to ${content}.`);
+            this.bot_config[set] = content;
+            return 0;
+        }
+        else{
+            console.log(`${set} not found.`);
+            return -1;
+        }
+
+    }
+
+    cheack_bot_config = () => {
+        var configs = ''
+        // console.log(this.bot_config);
+        for(var config in this.bot_config){
+            if(config == 'BOT_TOKEN') continue;
+            configs += `${config} : ${this.bot_config[config]}\n`
+        }
+        return configs
+    }
+
 }
 
 module.exports = Data_Control;
 
 // const test = new Data_Control()
 
-// test.add_goods("해으응", 100)
+// test.add_goods("해", 100)
 // test.del_goods("으응")
 // test.attend('<@!612952077127385089>')
 // test.manage("<@!612952077127385089>", -123)
@@ -272,4 +304,6 @@ module.exports = Data_Control;
 // test.attend("1234")
 // test.attend("1234")
 // console.log(test.User_Data)
+// test.edit_bot_config('attend_coin', 10)
+// console.log(test.cheack_bot_config())
 // test.save()
