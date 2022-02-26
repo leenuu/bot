@@ -133,6 +133,11 @@ class Data_Control {
 
     manage = (user, coin) => {
         if (user in this.User_Data) {
+            var judg = this.User_Data[user]["coin"] + coin
+            if ( 0 > judg) {
+                console.log(`not enough ${user}'coin.`);
+                return -2;
+            }
             this.User_Data[user]["coin"] += coin; 
             console.log(`${user}'s coins has been changed to ${coin}. remaining coins : ${this.User_Data[user]["coin"] - coin} -> ${this.User_Data[user]["coin"]}.`);
             return 0;
@@ -145,6 +150,11 @@ class Data_Control {
 
     manage_warning_down = (user, count) => {
         if (user in this.User_Data) {
+            var judg = this.User_Data[user]["warning_down"] + count
+            if ( 0 > judg) {
+                console.log(`not enough ${user}'warning_down.`);
+                return -2;
+            }
             this.User_Data[user]["warning_down"] += count; 
             console.log(`${user}'s warning_down has been changed to ${count}. remaining warning_down : ${this.User_Data[user]["warning_down"] - count} -> ${this.User_Data[user]["warning_down"]}.`);
             return 0;
