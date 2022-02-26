@@ -1,7 +1,7 @@
 const xlsx = require( "xlsx" );
 
 class Data_Control {
-
+    
     constructor() {
         this.attend_coin = 0
         this.User_Data = {};
@@ -131,10 +131,10 @@ class Data_Control {
         }
     }
 
-    manage = (user, money) => {
+    manage = (user, coin) => {
         if (user in this.User_Data) {
-            this.User_Data[user]["coin"] += money; 
-            console.log(`${user}'s coins has been changed to ${money}. remaining coins : ${this.User_Data[user]["coin"]}.`);
+            this.User_Data[user]["coin"] += coin; 
+            console.log(`${user}'s coins has been changed to ${coin}. remaining coins : ${this.User_Data[user]["coin"] - coin} -> ${this.User_Data[user]["coin"]}.`);
             return 0;
         }
         else {
@@ -146,7 +146,7 @@ class Data_Control {
     manage_warning_down = (user, count) => {
         if (user in this.User_Data) {
             this.User_Data[user]["warning_down"] += count; 
-            console.log(`${user}'s warning_down has been changed to ${count}. remaining warning_down : ${this.User_Data[user]["warning_down"]}.`);
+            console.log(`${user}'s warning_down has been changed to ${count}. remaining warning_down : ${this.User_Data[user]["warning_down"] - count} -> ${this.User_Data[user]["warning_down"]}.`);
             return 0;
         }
         else {
@@ -188,10 +188,10 @@ class Data_Control {
 
     buy = (user, goods) => {        
         if (user in this.User_Data){
-            var money = this.User_Data[user]["coin"];
+            var coin = this.User_Data[user]["coin"];
             var price = this.goods[goods];
 
-            if(money >= this.goods[goods]) {
+            if(coin >= this.goods[goods]) {
                 this.manage(user, -1 * price);
                 if(goods == "경고 차감권") this.manage_warning_down(user, 1);
             }
@@ -248,6 +248,8 @@ class Data_Control {
     }
 
 }
+
+module.exports = Data_Control;
 
 // const test = new Data_Control()
 
