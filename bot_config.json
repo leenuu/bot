@@ -1,3 +1,7 @@
 { 
-	"BOT_TOKEN" : "" 
+	"BOT_TOKEN" : "",
+	"goods_img": "https://i.imgur.com/wwVI352.jpg",
+	"help_img": "https://i.imgur.com/wwVI352.jpg",
+	"management_help_img": "https://i.imgur.com/wwVI352.jpg",
+	"attend_coin": 10
 }
