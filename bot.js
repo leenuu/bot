@@ -41,8 +41,6 @@ client.on('message', msg => {
 
     if (msg.content.slice(0, prefix.length) !== prefix) return;
     
-
-
     const args = msg.content.slice(prefix.length).trim().split(/ +/g);
     // console.log(msg.content.slice(prefix.length).trim().split(/ +/g));
     
