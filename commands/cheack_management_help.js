@@ -1,13 +1,13 @@
 const Discord = require('discord.js');
 
 exports.run = (client, msg, datas ,args) => {
-    var img_url = datas.bot_config["goods_img"]
+    var img_url = datas.bot_config["management_help_img"]
     const embed = new Discord.MessageEmbed()
-        .setTitle("상점 품목")
+        .setTitle("관리도움")
         .setColor('0f4c81') 
-        // .setDescription('상점 품목 입니다.')
+        // .setDescription('관리도움 입니다.')
         .setImage(img_url);
     msg.reply({ embeds: [embed] });
 };
 
-exports.name = "상점품목확인";
+exports.name = "관리도움";
