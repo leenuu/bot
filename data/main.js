@@ -39,6 +39,3 @@ class Data_Control {
      
 }
 
-const test = new Data_Control()
-
-console.log(test.Temp_Data)
