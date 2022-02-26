@@ -1,7 +1,11 @@
 const Discord = require('discord.js');
-const bot_config = require('./bot_config.json')
-const prefix = "!";
+const bot_config = require('./bot_config.json');
+const Data_Control = require('./data/main.js')
+const prefix = ">";
 const fs = require('fs');
+
+const datas = new Data_Control()
+const test = "test"
 
 const client = new Discord.Client({ 
     intents: [
@@ -14,6 +18,7 @@ client.commands = new Discord.Collection()
 // console.log(fs.readdirSync("./commands"))
 
 client.commands.load = dir => {
+    console.log(fs.readdirSync(dir))
     for (const file of fs.readdirSync(dir)) {
         const cmd = require(`./commands/${file}`);
         console.log(cmd)
@@ -23,7 +28,8 @@ client.commands.load = dir => {
 }
 
 client.commands.load("./commands");
-//해당 파일이 위치한 디렉터리에서 "/commands" 경로를 추가
+
+// console.log(__dirname)
 
 client.on('ready', () => console.log(`${client.user.tag} 에 로그인됨`));
 
@@ -36,11 +42,14 @@ client.on('message', msg => {
     if (msg.content.slice(0, prefix.length) !== prefix) return;
     
 
+
     const args = msg.content.slice(prefix.length).trim().split(/ +/g);
+    // console.log(msg.content.slice(prefix.length).trim().split(/ +/g));
+    
     const command = args.shift().toLowerCase();
 
     let cmd = client.commands.get(command);
-    if(cmd) cmd.run(client, msg, args);
+    if(cmd) cmd.run(client, msg, datas ,args);
 })
 
 
