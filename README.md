@@ -1,3 +1,3 @@
 # bot
 
-discord, Express, xlsx
+discord.js, Express, xlsx
