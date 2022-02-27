@@ -1,5 +1,18 @@
 {
-    "경고 차감권": 100,
-    "해으응": 100,
-    "해": 100
+    "경고 차감권": {
+        "price": 100,
+        "content": "warning_down"
+    },
+    "해으응": {
+        "price": 100,
+        "content": "role"
+    },
+    "해": {
+        "price": 100,
+        "content": "role"
+    },
+    "웅앵앵": {
+        "price": 100,
+        "content": "role"
+    }
 }

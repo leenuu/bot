@@ -56,7 +56,7 @@ class Data_Control {
     load = () => {
         this.goods = require('./goods.json');
         this.bot_config = require("../bot_config.json")
-        this.attend_coin = this.bot_config["attend_coin"]
+        this.attend_coin = parseInt(this.bot_config["attend_coin"]);
 
         try {
 
@@ -112,11 +112,11 @@ class Data_Control {
         var seconds = today.getSeconds();  
 
         if (choice == "exact"){
-            return `${year}-${month}-${date}-${day}-${hours}-${minutes}-${seconds}`;
+            return `${year}/${month}/${date}/${day}/${hours}/${minutes}/${seconds}`;
         }
         
         else if (choice == "simple"){
-            return `${year}-${month}-${date}-${day}`;
+            return `${year}/${month}/${date}`;
         }   
     }
 
@@ -186,9 +186,10 @@ class Data_Control {
         }
     }
 
-    add_goods = (goods, price) => {
-        console.log(`The price of ${goods} is registered as ${price}.`);
-        this.goods[goods] = price;
+    add_goods = (goods, price, content) => {
+        
+        console.log(`The price of ${goods}(${content}) is registered as ${price}.`);
+        this.goods[goods] = {"price" : price, "content" : content};
         console.log(this.goods);
     }
 
@@ -231,6 +232,19 @@ class Data_Control {
         if (user in this.User_Data){
             console.log("coin cheack.")
             return this.User_Data[user]["coin"];
+        }
+
+        else
+        { 
+            console.log(`${user} not found.`);
+            return -1;
+        }
+    }
+
+    cheack_warning_down = user => {
+        if (user in this.User_Data){
+            console.log("warning_down cheack.")
+            return this.User_Data[user]["warning_down"];
         }
 
         else
@@ -287,6 +301,15 @@ class Data_Control {
             configs += `${config} : ${this.bot_config[config]}\n`
         }
         return configs
+    }
+
+    change_id = user => {
+        if(user.charAt(2) == '!') {
+            return user;
+        }
+        else {
+            return [user.slice(0, 2), "!", user.slice(2)].join('');
+        }
     }
 
 }
