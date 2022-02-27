@@ -33,10 +33,19 @@ client.commands.load("./commands");
 
 client.on('ready', () => console.log(`${client.user.tag} 에 로그인됨`));
 
-client.on('message', msg => {
-    if (msg.author.bot) return;
-    
+// client.on("roleUpdate", async (oldRole, newRole) => {
 
+//     console.log(oldRole);
+//     console.log(newRole);
+   
+// });
+
+client.on('message', msg => {
+    // if (msg.member.roles.cache.find(role => role.id === '')) console.log("12")
+    if (msg.author.bot) return;
+    // var user = `<@!${msg.author.id}>`;
+    // datas.add_chat_count(user);
+    
     if (!msg.content.startsWith(prefix)) return;
 
     if (msg.content.slice(0, prefix.length) !== prefix) return;
@@ -48,7 +57,7 @@ client.on('message', msg => {
 
     let cmd = client.commands.get(command);
     if(cmd) cmd.run(client, msg, datas ,args);
-})
+});
 
 
 client.login(bot_config.BOT_TOKEN);
