@@ -3,6 +3,8 @@ const Discord = require('discord.js');
 exports.run = async (client, msg, datas, args) => {
 
     try {
+        if (!msg.member.roles.cache.some(role => role.id === datas.bot_config["management_user_role_id"])) throw new Error('permission denied.');
+        datas.save()
         var new_goods = args[0];
         var new_goods_price = args[1];
         var new_goods_content = args[2];
@@ -15,6 +17,7 @@ exports.run = async (client, msg, datas, args) => {
 
     catch(error){
         if (error.message == "not int") await msg.reply("가격이 틀렸습니다.");
+        else if (error.message == 'permission denied.') await msg.reply(`권한이 없습니다.`);
         else await msg.reply("명령어가 틀렸습니다.");
     }
 };

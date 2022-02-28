@@ -2,6 +2,8 @@ const Discord = require('discord.js');
 
 exports.run = async (client, msg, datas ,args) => {
     try{
+        if (!msg.member.roles.cache.some(role => role.id === datas.bot_config["management_user_role_id"])) throw new Error('permission denied.');
+
         var user = datas.change_id(args[0]);
         var count = args[1];
         if (isNaN(count)) throw new Error("not int");
@@ -18,6 +20,8 @@ exports.run = async (client, msg, datas ,args) => {
         // console.log(error.message)
         if (error.message == "not int") await msg.reply("경고차감권수가 틀렸습니다.");
         else if (error.message == `not enough warning_down.`) await msg.reply("경고차감권이 부족합니다.");
+        else if (error.message == 'not found.') await msg.reply(`${goods}가 상품목록에 존재하지 않습니다.`);
+        else if (error.message == 'permission denied.') await msg.reply(`권한이 없습니다.`);
         else await msg.reply("명령어가 틀렸습니다.");
     }
     

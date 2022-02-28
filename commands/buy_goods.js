@@ -3,6 +3,9 @@ const Discord = require('discord.js');
 exports.run = async (client, msg, datas, args) => {
 
     try {
+        if (!msg.member.roles.cache.some(role => role.id === datas.bot_config["normal_user_role_id"])) throw new Error('permission denied.');
+        else if (!msg.member.roles.cache.some(role => role.id === datas.bot_config["management_user_role_id"])) throw new Error('permission denied.');
+
         var user = `<@!${msg.author.id}>`;
         var goods = args[0];
 
@@ -27,6 +30,7 @@ exports.run = async (client, msg, datas, args) => {
     catch(error) {
         if (error.message == 'goods not found.') await msg.reply(`${goods}가 상품목록에 존재하지 않습니다.`);
         else if (error.message == 'goods not found.') await msg.reply(`${user}가 존재하지 않습니다.`);
+        else if (error.message == 'permission denied.') await msg.reply(`권한이 없습니다.`);
         else if (error.message == 'not enough coin.') await msg.reply(`코인이 부족합니다.`);
         else await msg.reply("명령어가 틀렸습니다.");
     }
