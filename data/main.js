@@ -207,17 +207,26 @@ class Data_Control {
     }
 
     buy = (user, goods) => {        
+        if(!(goods in this.goods)) 
+        {
+            console.log(`${goods} not found.`);
+            return -3;  
+        }
+
         if (user in this.User_Data){
             var coin = this.User_Data[user]["coin"];
-            var price = this.goods[goods];
+            var price = this.goods[goods]["price"];
 
-            if(coin >= this.goods[goods]) {
+            if(coin >= price) {
                 this.manage(user, -1 * price);
                 if(goods == "경고 차감권") this.manage_warning_down(user, 1);
+                return 0;
             }
             
-            else console.log("not enough coin.");
-                return 0;    
+            else {
+                console.log("not enough coin.");
+                return -2;
+            }    
         }
 
         else{
