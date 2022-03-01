@@ -7,6 +7,7 @@ class Data_Control {
         this.attend_coin = 0
         this.User_Data = {};
         this.goods = {};
+        this.bot_config = {};
         this.load();
     }
 
