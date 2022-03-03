@@ -40,12 +40,18 @@ client.on('ready', () => console.log(`${client.user.tag} 에 로그인됨`));
    
 // });
 
-client.on('message', msg => {
+// client.on('guildMemberRemove', async member => {
+//     console.log(member.user.username)
+// });
+
+client.on('message', async msg => {
+    // msg.attachments.forEach(function(attachment) {
+    // console.log(attachment.url)})
     // if (msg.member.roles.cache.find(role => role.id === '')) console.log("12")
     if (msg.author.bot) return;
     // var user = `<@!${msg.author.id}>`;
     // datas.add_chat_count(user);
-    if (!msg.content.startsWith(prefix)) return;
+    if (!msg.content.startsWith(prefix )) return;
 
     if (msg.content.slice(0, prefix.length) !== prefix) return;
     
