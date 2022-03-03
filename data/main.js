@@ -123,8 +123,10 @@ class Data_Control {
 
     add_user = user => {
         if (user in this.User_Data) {
-            console.log(`${user} is not new user.`);
-            return -1
+            console.log(`${user} is not new user. old user's information has been initialized.`);
+            this.clear(user);
+            this.add_user(user);
+            
         }
         else {
             this.User_Data[user] = {
