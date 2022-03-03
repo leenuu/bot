@@ -11,6 +11,7 @@ exports.run = async (client, msg, datas ,args) => {
             var user_id = datas.change_id(args[i]).slice(3, -1);
             var user = await client.users.fetch(user_id).catch(console.error);
              
+            datas.add_user(args[i])
             arr[i] = user['username'];
         }
         
