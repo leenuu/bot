@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 
 exports.run = async (client, msg, datas ,args) => {
+    
     try{
         if (!msg.member.roles.cache.some(role => role.id === datas.bot_config["normal_user_role_id"])) throw new Error('permission denied.');
         else if (!msg.member.roles.cache.some(role => role.id === datas.bot_config["management_user_role_id"])) throw new Error('permission denied.');
