@@ -91,8 +91,10 @@ const { Client, Collection, Intents } = require("discord.js");
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
 const bot_config = require('./bot_config.json');
+const Data_Control = require('./data/main.js')
 const fs = require('node:fs');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
+const datas = new Data_Control()
 
 client.commands = new Collection();
 
@@ -142,7 +144,7 @@ client.on("interactionCreate", async interaction => {
     if (!command) return;
 
     try {
-        await command.execute(interaction);
+        await command.execute(interaction, client, datas);
     } catch (error) {
         console.error(error);
         await interaction.reply({
