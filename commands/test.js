@@ -2,12 +2,14 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("유저")
-    .setDescription("유저 정보를 봅니다!")
-    .addStringOption(option => option.setName('input').setDescription('Enter a string')),
+    .setName("test")
+    .setDescription("test command")
+    .addStringOption(option => option.setName('input').setDescription('test')),
 
-  async execute(interaction) {
-    // await interaction.reply(`Your tag: ${interaction.user.tag}\nYour id: ${interaction.user.id}` );
-      await interaction.reply(interaction.options.getString('input'));
+  async execute(interaction, datas) {
+    // await interaction.reply(`${interaction.options.getString('input')}`);
+      // await interaction.reply();
+      // await interaction.reply();
+      console.log(interaction.member)
   },
 };
