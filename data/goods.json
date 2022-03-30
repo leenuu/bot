@@ -14,5 +14,9 @@
     "웅앵앵": {
         "price": 100,
         "content": "role"
+    },
+    "test": {
+        "price": 100,
+        "content": "test"
     }
 }
